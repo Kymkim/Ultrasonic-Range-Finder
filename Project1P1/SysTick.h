@@ -1,0 +1,1 @@
+void SysTick_Init(void(*task)(void));
