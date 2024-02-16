@@ -1,10 +1,11 @@
 // SysTick.c
 // Runs on TM4C123
-// Implements an SysTick timer with Interrupt that triggers every 2Hz
+// Implements Systick timer for the Ultrasonic Sensor
 // February 15, 2024
 // Oliver Cabral
 
 #include "tm4c123gh6pm.h"
+
 
 void (*SysTickTask)(void);		//User defined function
 
@@ -12,10 +13,10 @@ void (*SysTickTask)(void);		//User defined function
 //
 //Input: *task = Function to be executed when the SysTick timer triggers.
 //Output: None
-void SysTick_Init(void(*task)(void)){
+void SysTick_Init(void(*task)(void), unsigned int reload){
 	SysTickTask = task;
   NVIC_ST_CTRL_R 		= 0x00000000;                   
-  NVIC_ST_RELOAD_R 	= (NVIC_ST_RELOAD_M/2)-1;  
+  NVIC_ST_RELOAD_R 	= reload-1;  
   NVIC_ST_CURRENT_R = 0x00000000;          
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x1FFFFFFF)|0x40000000;
   NVIC_ST_CTRL_R = 0x07; 
