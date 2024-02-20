@@ -8,26 +8,24 @@ Section Cross References
     startup.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers to startup.o(STACK) for StackMem
-    startup.o(RESET) refers to systick.o(.text.SysTick_Handler) for SysTick_Handler
     startup.o(RESET) refers to ultrasonic_sensor.o(.text.GPIOPortB_Handler) for GPIOPortB_Handler
     startup.o(RESET) refers to __main.o(!!!main) for __main
     startup.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(.text) refers to startup.o(HEAP) for HeapMem
     startup.o(.text) refers to startup.o(STACK) for StackMem
     ultrasonic_sensor.o(.text.main) refers to pll.o(.text.PLL_Init) for PLL_Init
-    ultrasonic_sensor.o(.text.main) refers to ultrasonic_sensor.o(.text.LEDToggler) for LEDToggler
-    ultrasonic_sensor.o(.text.main) refers to systick.o(.text.SysTick_Init) for SysTick_Init
     ultrasonic_sensor.o(.text.main) refers to startup.o(.text) for EnableInterrupts
     ultrasonic_sensor.o(.text.main) refers to ultrasonic_sensor.o(.bss.done) for done
     ultrasonic_sensor.o(.text.main) refers to ultrasonic_sensor.o(.bss.distance) for distance
-    ultrasonic_sensor.o(.text.main) refers to timer1a.o(.text.Timer1A_Wait1us) for Timer1A_Wait1us
+    ultrasonic_sensor.o(.text.main) refers to ultrasonic_sensor.o(.bss.duty_high) for duty_high
+    ultrasonic_sensor.o(.text.main) refers to systick.o(.text.SysTick_Start) for SysTick_Start
+    ultrasonic_sensor.o(.text.main) refers to systick.o(.text.SysTick_Wait) for SysTick_Wait
+    ultrasonic_sensor.o(.text.main) refers to systick.o(.text.SysTick_Wait1us) for SysTick_Wait1us
+    ultrasonic_sensor.o(.text.main) refers to ultrasonic_sensor.o(.bss.duty_low) for duty_low
+    ultrasonic_sensor.o(.text.main) refers to systick.o(.text.SysTick_Stop) for SysTick_Stop
     ultrasonic_sensor.o(.ARM.exidx.text.main) refers to ultrasonic_sensor.o(.text.main) for [Anonymous Symbol]
     ultrasonic_sensor.o(.ARM.exidx.text.PortB_Init) refers to ultrasonic_sensor.o(.text.PortB_Init) for [Anonymous Symbol]
     ultrasonic_sensor.o(.ARM.exidx.text.PortF_Init) refers to ultrasonic_sensor.o(.text.PortF_Init) for [Anonymous Symbol]
-    ultrasonic_sensor.o(.text.LEDToggler) refers to ultrasonic_sensor.o(.bss.distance) for distance
-    ultrasonic_sensor.o(.text.LEDToggler) refers to ultrasonic_sensor.o(.bss.duty_high) for duty_high
-    ultrasonic_sensor.o(.text.LEDToggler) refers to ultrasonic_sensor.o(.bss.duty_low) for duty_low
-    ultrasonic_sensor.o(.ARM.exidx.text.LEDToggler) refers to ultrasonic_sensor.o(.text.LEDToggler) for [Anonymous Symbol]
     ultrasonic_sensor.o(.text.GPIOPortB_Handler) refers to timer1a.o(.text.Timer1A_Init) for Timer1A_Init
     ultrasonic_sensor.o(.text.GPIOPortB_Handler) refers to timer1a.o(.text.Timer1A_Stop) for Timer1A_Stop
     ultrasonic_sensor.o(.text.GPIOPortB_Handler) refers to timer1a.o(.text.Timer1A_Get_MC_Elapsed) for Timer1A_Get_MC_Elapsed
@@ -42,10 +40,11 @@ Section Cross References
     timer1a.o(.ARM.exidx.text.Timer1A_Stop) refers to timer1a.o(.text.Timer1A_Stop) for [Anonymous Symbol]
     timer1a.o(.ARM.exidx.text.Timer1A_Get_MC_Elapsed) refers to timer1a.o(.text.Timer1A_Get_MC_Elapsed) for [Anonymous Symbol]
     timer1a.o(.ARM.exidx.text.Timer1A_Wait1us) refers to timer1a.o(.text.Timer1A_Wait1us) for [Anonymous Symbol]
-    systick.o(.text.SysTick_Init) refers to systick.o(.bss.SysTickTask) for SysTickTask
-    systick.o(.ARM.exidx.text.SysTick_Init) refers to systick.o(.text.SysTick_Init) for [Anonymous Symbol]
-    systick.o(.text.SysTick_Handler) refers to systick.o(.bss.SysTickTask) for SysTickTask
-    systick.o(.ARM.exidx.text.SysTick_Handler) refers to systick.o(.text.SysTick_Handler) for [Anonymous Symbol]
+    systick.o(.ARM.exidx.text.SysTick_Start) refers to systick.o(.text.SysTick_Start) for [Anonymous Symbol]
+    systick.o(.ARM.exidx.text.SysTick_Stop) refers to systick.o(.text.SysTick_Stop) for [Anonymous Symbol]
+    systick.o(.ARM.exidx.text.SysTick_Get_MC_Elapsed) refers to systick.o(.text.SysTick_Get_MC_Elapsed) for [Anonymous Symbol]
+    systick.o(.ARM.exidx.text.SysTick_Wait1us) refers to systick.o(.text.SysTick_Wait1us) for [Anonymous Symbol]
+    systick.o(.ARM.exidx.text.SysTick_Wait) refers to systick.o(.text.SysTick_Wait) for [Anonymous Symbol]
     __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
     dfixu.o(x$fpl$dfixu) refers (Special) to usenofp.o(x$fpl$usenofp) for __I$use$fp
     dfixu.o(x$fpl$dfixu) refers to dnaninf.o(x$fpl$dnaninf) for __fpl_dnaninf
@@ -173,9 +172,8 @@ Removing Unused input sections from the image.
     Removing ultrasonic_sensor.o(.ARM.exidx.text.main), (8 bytes).
     Removing ultrasonic_sensor.o(.text.PortB_Init), (158 bytes).
     Removing ultrasonic_sensor.o(.ARM.exidx.text.PortB_Init), (8 bytes).
-    Removing ultrasonic_sensor.o(.text.PortF_Init), (80 bytes).
+    Removing ultrasonic_sensor.o(.text.PortF_Init), (84 bytes).
     Removing ultrasonic_sensor.o(.ARM.exidx.text.PortF_Init), (8 bytes).
-    Removing ultrasonic_sensor.o(.ARM.exidx.text.LEDToggler), (8 bytes).
     Removing ultrasonic_sensor.o(.ARM.exidx.text.GPIOPortB_Handler), (8 bytes).
     Removing ultrasonic_sensor.o(.ARM.use_no_argv), (4 bytes).
     Removing pll.o(.text), (0 bytes).
@@ -184,12 +182,17 @@ Removing Unused input sections from the image.
     Removing timer1a.o(.ARM.exidx.text.Timer1A_Init), (8 bytes).
     Removing timer1a.o(.ARM.exidx.text.Timer1A_Stop), (8 bytes).
     Removing timer1a.o(.ARM.exidx.text.Timer1A_Get_MC_Elapsed), (8 bytes).
+    Removing timer1a.o(.text.Timer1A_Wait1us), (78 bytes).
     Removing timer1a.o(.ARM.exidx.text.Timer1A_Wait1us), (8 bytes).
     Removing systick.o(.text), (0 bytes).
-    Removing systick.o(.ARM.exidx.text.SysTick_Init), (8 bytes).
-    Removing systick.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
+    Removing systick.o(.ARM.exidx.text.SysTick_Start), (8 bytes).
+    Removing systick.o(.ARM.exidx.text.SysTick_Stop), (8 bytes).
+    Removing systick.o(.text.SysTick_Get_MC_Elapsed), (16 bytes).
+    Removing systick.o(.ARM.exidx.text.SysTick_Get_MC_Elapsed), (8 bytes).
+    Removing systick.o(.ARM.exidx.text.SysTick_Wait1us), (8 bytes).
+    Removing systick.o(.ARM.exidx.text.SysTick_Wait), (8 bytes).
 
-19 unused section(s) (total 338 bytes) removed from the image.
+23 unused section(s) (total 452 bytes) removed from the image.
 
 ==============================================================================
 
@@ -318,30 +321,30 @@ Image Symbol Table
     .text                                    0x000003d8   Section        2  use_no_semi.o(.text)
     .text                                    0x000003da   Section        0  indicate_semi.o(.text)
     [Anonymous Symbol]                       0x000003dc   Section        0  ultrasonic_sensor.o(.text.GPIOPortB_Handler)
-    [Anonymous Symbol]                       0x00000444   Section        0  ultrasonic_sensor.o(.text.LEDToggler)
-    [Anonymous Symbol]                       0x0000053c   Section        0  pll.o(.text.PLL_Init)
-    [Anonymous Symbol]                       0x000005a8   Section        0  systick.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x000005b4   Section        0  systick.o(.text.SysTick_Init)
-    [Anonymous Symbol]                       0x000005e4   Section        0  timer1a.o(.text.Timer1A_Get_MC_Elapsed)
-    [Anonymous Symbol]                       0x000005f4   Section        0  timer1a.o(.text.Timer1A_Init)
-    [Anonymous Symbol]                       0x0000062c   Section        0  timer1a.o(.text.Timer1A_Stop)
-    [Anonymous Symbol]                       0x0000063c   Section        0  timer1a.o(.text.Timer1A_Wait1us)
-    [Anonymous Symbol]                       0x0000068c   Section        0  ultrasonic_sensor.o(.text.main)
-    x$fpl$dfixu                              0x000007f8   Section       90  dfixu.o(x$fpl$dfixu)
-    x$fpl$dfltu                              0x00000852   Section       38  dflt_clz.o(x$fpl$dfltu)
-    x$fpl$dmul                               0x00000878   Section      340  dmul.o(x$fpl$dmul)
-    x$fpl$dnaninf                            0x000009cc   Section      156  dnaninf.o(x$fpl$dnaninf)
-    x$fpl$dretinf                            0x00000a68   Section       12  dretinf.o(x$fpl$dretinf)
-    x$fpl$usenofp                            0x00000a74   Section        0  usenofp.o(x$fpl$usenofp)
+    [Anonymous Symbol]                       0x00000444   Section        0  pll.o(.text.PLL_Init)
+    [Anonymous Symbol]                       0x000004b0   Section        0  systick.o(.text.SysTick_Start)
+    [Anonymous Symbol]                       0x000004d0   Section        0  systick.o(.text.SysTick_Stop)
+    [Anonymous Symbol]                       0x000004e0   Section        0  systick.o(.text.SysTick_Wait)
+    [Anonymous Symbol]                       0x00000500   Section        0  systick.o(.text.SysTick_Wait1us)
+    [Anonymous Symbol]                       0x0000052c   Section        0  timer1a.o(.text.Timer1A_Get_MC_Elapsed)
+    [Anonymous Symbol]                       0x0000053c   Section        0  timer1a.o(.text.Timer1A_Init)
+    [Anonymous Symbol]                       0x00000574   Section        0  timer1a.o(.text.Timer1A_Stop)
+    [Anonymous Symbol]                       0x00000584   Section        0  ultrasonic_sensor.o(.text.main)
+    x$fpl$dfixu                              0x000007b8   Section       90  dfixu.o(x$fpl$dfixu)
+    x$fpl$dfltu                              0x00000812   Section       38  dflt_clz.o(x$fpl$dfltu)
+    x$fpl$dmul                               0x00000838   Section      340  dmul.o(x$fpl$dmul)
+    x$fpl$dnaninf                            0x0000098c   Section      156  dnaninf.o(x$fpl$dnaninf)
+    x$fpl$dretinf                            0x00000a28   Section       12  dretinf.o(x$fpl$dretinf)
+    x$fpl$usenofp                            0x00000a34   Section        0  usenofp.o(x$fpl$usenofp)
     .bss                                     0x20000000   Section       96  libspace.o(.bss)
-    distance                                 0x20000064   Data           4  ultrasonic_sensor.o(.bss.distance)
-    [Anonymous Symbol]                       0x20000064   Section        0  ultrasonic_sensor.o(.bss.distance)
-    done                                     0x20000068   Data           1  ultrasonic_sensor.o(.bss.done)
-    [Anonymous Symbol]                       0x20000068   Section        0  ultrasonic_sensor.o(.bss.done)
-    HeapMem                                  0x20000078   Data           0  startup.o(HEAP)
-    StackMem                                 0x20000078   Data           0  startup.o(STACK)
-    HEAP                                     0x20000078   Section        0  startup.o(HEAP)
-    STACK                                    0x20000078   Section     1024  startup.o(STACK)
+    distance                                 0x20000060   Data           4  ultrasonic_sensor.o(.bss.distance)
+    [Anonymous Symbol]                       0x20000060   Section        0  ultrasonic_sensor.o(.bss.distance)
+    done                                     0x20000064   Data           1  ultrasonic_sensor.o(.bss.done)
+    [Anonymous Symbol]                       0x20000064   Section        0  ultrasonic_sensor.o(.bss.done)
+    HeapMem                                  0x20000070   Data           0  startup.o(HEAP)
+    StackMem                                 0x20000070   Data           0  startup.o(STACK)
+    HEAP                                     0x20000070   Section        0  startup.o(HEAP)
+    STACK                                    0x20000070   Section     1024  startup.o(STACK)
 
     Global Symbols
 
@@ -388,6 +391,7 @@ Image Symbol Table
     SVC_Handler                              0x0000027b   Thumb Code     2  startup.o(RESET)
     DebugMon_Handler                         0x0000027d   Thumb Code     2  startup.o(RESET)
     PendSV_Handler                           0x0000027f   Thumb Code     2  startup.o(RESET)
+    SysTick_Handler                          0x00000281   Thumb Code     2  startup.o(RESET)
     ADC0Seq0_Handler                         0x00000283   Thumb Code     0  startup.o(RESET)
     ADC0Seq1_Handler                         0x00000283   Thumb Code     0  startup.o(RESET)
     ADC0Seq2_Handler                         0x00000283   Thumb Code     0  startup.o(RESET)
@@ -569,31 +573,30 @@ Image Symbol Table
     __use_no_semihosting_swi                 0x000003d9   Thumb Code     2  use_no_semi.o(.text)
     __semihosting_library_function           0x000003db   Thumb Code     0  indicate_semi.o(.text)
     GPIOPortB_Handler                        0x000003dd   Thumb Code   102  ultrasonic_sensor.o(.text.GPIOPortB_Handler)
-    LEDToggler                               0x00000445   Thumb Code   248  ultrasonic_sensor.o(.text.LEDToggler)
-    PLL_Init                                 0x0000053d   Thumb Code   106  pll.o(.text.PLL_Init)
-    SysTick_Handler                          0x000005a9   Thumb Code    12  systick.o(.text.SysTick_Handler)
-    SysTick_Init                             0x000005b5   Thumb Code    48  systick.o(.text.SysTick_Init)
-    Timer1A_Get_MC_Elapsed                   0x000005e5   Thumb Code    16  timer1a.o(.text.Timer1A_Get_MC_Elapsed)
-    Timer1A_Init                             0x000005f5   Thumb Code    54  timer1a.o(.text.Timer1A_Init)
-    Timer1A_Stop                             0x0000062d   Thumb Code    14  timer1a.o(.text.Timer1A_Stop)
-    Timer1A_Wait1us                          0x0000063d   Thumb Code    78  timer1a.o(.text.Timer1A_Wait1us)
-    main                                     0x0000068d   Thumb Code   364  ultrasonic_sensor.o(.text.main)
-    __aeabi_d2uiz                            0x000007f9   Thumb Code     0  dfixu.o(x$fpl$dfixu)
-    _dfixu                                   0x000007f9   Thumb Code    90  dfixu.o(x$fpl$dfixu)
-    __aeabi_ui2d                             0x00000853   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
-    _dfltu                                   0x00000853   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
-    __aeabi_dmul                             0x00000879   Thumb Code     0  dmul.o(x$fpl$dmul)
-    _dmul                                    0x00000879   Thumb Code   332  dmul.o(x$fpl$dmul)
-    __fpl_dnaninf                            0x000009cd   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
-    __fpl_dretinf                            0x00000a69   Thumb Code    12  dretinf.o(x$fpl$dretinf)
-    Region$$Table$$Base                      0x00000a74   Number         0  anon$$obj.o(Region$$Table)
-    __I$use$fp                               0x00000a74   Number         0  usenofp.o(x$fpl$usenofp)
-    Region$$Table$$Limit                     0x00000a84   Number         0  anon$$obj.o(Region$$Table)
+    PLL_Init                                 0x00000445   Thumb Code   106  pll.o(.text.PLL_Init)
+    SysTick_Start                            0x000004b1   Thumb Code    30  systick.o(.text.SysTick_Start)
+    SysTick_Stop                             0x000004d1   Thumb Code    14  systick.o(.text.SysTick_Stop)
+    SysTick_Wait                             0x000004e1   Thumb Code    32  systick.o(.text.SysTick_Wait)
+    SysTick_Wait1us                          0x00000501   Thumb Code    44  systick.o(.text.SysTick_Wait1us)
+    Timer1A_Get_MC_Elapsed                   0x0000052d   Thumb Code    16  timer1a.o(.text.Timer1A_Get_MC_Elapsed)
+    Timer1A_Init                             0x0000053d   Thumb Code    54  timer1a.o(.text.Timer1A_Init)
+    Timer1A_Stop                             0x00000575   Thumb Code    14  timer1a.o(.text.Timer1A_Stop)
+    main                                     0x00000585   Thumb Code   564  ultrasonic_sensor.o(.text.main)
+    __aeabi_d2uiz                            0x000007b9   Thumb Code     0  dfixu.o(x$fpl$dfixu)
+    _dfixu                                   0x000007b9   Thumb Code    90  dfixu.o(x$fpl$dfixu)
+    __aeabi_ui2d                             0x00000813   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
+    _dfltu                                   0x00000813   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
+    __aeabi_dmul                             0x00000839   Thumb Code     0  dmul.o(x$fpl$dmul)
+    _dmul                                    0x00000839   Thumb Code   332  dmul.o(x$fpl$dmul)
+    __fpl_dnaninf                            0x0000098d   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
+    __fpl_dretinf                            0x00000a29   Thumb Code    12  dretinf.o(x$fpl$dretinf)
+    Region$$Table$$Base                      0x00000a34   Number         0  anon$$obj.o(Region$$Table)
+    __I$use$fp                               0x00000a34   Number         0  usenofp.o(x$fpl$usenofp)
+    Region$$Table$$Limit                     0x00000a44   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000000   Data          96  libspace.o(.bss)
-    SysTickTask                              0x20000060   Data           4  systick.o(.bss.SysTickTask)
     __temporary_stack_top$libspace           0x20000060   Data           0  libspace.o(.bss)
-    duty_high                                0x2000006c   Data           4  ultrasonic_sensor.o(.bss.duty_high)
-    duty_low                                 0x20000070   Data           4  ultrasonic_sensor.o(.bss.duty_low)
+    duty_high                                0x20000068   Data           4  ultrasonic_sensor.o(.bss.duty_high)
+    duty_low                                 0x2000006c   Data           4  ultrasonic_sensor.o(.bss.duty_low)
 
 
 
@@ -603,114 +606,113 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000a84, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000a44, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000a84, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000a44, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000284   0x00000008   Code   RO           75  * !!!main             c_w.l(__main.o)
-    0x0000028c   0x0000028c   0x0000005c   Code   RO          257    !!!scatter          c_w.l(__scatter.o)
-    0x000002e8   0x000002e8   0x00000002   Code   RO          258    !!handler_null      c_w.l(__scatter.o)
+    0x00000284   0x00000284   0x00000008   Code   RO           78  * !!!main             c_w.l(__main.o)
+    0x0000028c   0x0000028c   0x0000005c   Code   RO          260    !!!scatter          c_w.l(__scatter.o)
+    0x000002e8   0x000002e8   0x00000002   Code   RO          261    !!handler_null      c_w.l(__scatter.o)
     0x000002ea   0x000002ea   0x00000002   PAD
-    0x000002ec   0x000002ec   0x0000001c   Code   RO          261    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x00000308   0x00000308   0x00000002   Code   RO          119    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          126    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          128    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          130    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          133    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          135    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          137    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          140    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          142    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          144    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          146    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          148    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          150    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          152    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          154    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          156    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          158    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          160    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          164    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          166    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          168    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          170    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
-    0x0000030a   0x0000030a   0x00000002   Code   RO          171    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
-    0x0000030c   0x0000030c   0x00000002   Code   RO          193    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          208    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          210    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          213    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          216    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          218    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000000   Code   RO          221    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0000030e   0x0000030e   0x00000002   Code   RO          222    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x00000310   0x00000310   0x00000000   Code   RO           89    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x00000310   0x00000310   0x00000000   Code   RO           96    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x00000310   0x00000310   0x00000006   Code   RO          108    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x00000316   0x00000316   0x00000000   Code   RO           98    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x00000316   0x00000316   0x00000004   Code   RO           99    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x0000031a   0x0000031a   0x00000000   Code   RO          101    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x0000031a   0x0000031a   0x00000008   Code   RO          102    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x00000322   0x00000322   0x00000002   Code   RO          123    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000324   0x00000324   0x00000000   Code   RO          173    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000324   0x00000324   0x00000004   Code   RO          174    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000328   0x00000328   0x00000006   Code   RO          175    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002ec   0x000002ec   0x0000001c   Code   RO          264    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x00000308   0x00000308   0x00000002   Code   RO          122    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          129    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          131    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          133    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          136    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          138    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          140    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          143    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          145    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          147    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          149    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          151    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          153    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          155    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          157    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          159    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          161    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          163    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          167    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          169    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          171    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          173    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x0000030a   0x0000030a   0x00000002   Code   RO          174    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x0000030c   0x0000030c   0x00000002   Code   RO          196    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          211    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          213    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          216    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          219    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          221    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO          224    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0000030e   0x0000030e   0x00000002   Code   RO          225    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x00000310   0x00000310   0x00000000   Code   RO           92    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x00000310   0x00000310   0x00000000   Code   RO           99    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x00000310   0x00000310   0x00000006   Code   RO          111    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x00000316   0x00000316   0x00000000   Code   RO          101    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x00000316   0x00000316   0x00000004   Code   RO          102    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x0000031a   0x0000031a   0x00000000   Code   RO          104    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x0000031a   0x0000031a   0x00000008   Code   RO          105    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x00000322   0x00000322   0x00000002   Code   RO          126    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000324   0x00000324   0x00000000   Code   RO          176    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000324   0x00000324   0x00000004   Code   RO          177    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000328   0x00000328   0x00000006   Code   RO          178    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000032e   0x0000032e   0x00000002   PAD
     0x00000330   0x00000330   0x00000030   Code   RO            4    .text               startup.o
-    0x00000360   0x00000360   0x00000006   Code   RO           73    .text               c_w.l(heapauxi.o)
-    0x00000366   0x00000366   0x0000004a   Code   RO          110    .text               c_w.l(sys_stackheap_outer.o)
-    0x000003b0   0x000003b0   0x00000012   Code   RO          112    .text               c_w.l(exit.o)
+    0x00000360   0x00000360   0x00000006   Code   RO           76    .text               c_w.l(heapauxi.o)
+    0x00000366   0x00000366   0x0000004a   Code   RO          113    .text               c_w.l(sys_stackheap_outer.o)
+    0x000003b0   0x000003b0   0x00000012   Code   RO          115    .text               c_w.l(exit.o)
     0x000003c2   0x000003c2   0x00000002   PAD
-    0x000003c4   0x000003c4   0x00000008   Code   RO          120    .text               c_w.l(libspace.o)
-    0x000003cc   0x000003cc   0x0000000c   Code   RO          183    .text               c_w.l(sys_exit.o)
-    0x000003d8   0x000003d8   0x00000002   Code   RO          198    .text               c_w.l(use_no_semi.o)
-    0x000003da   0x000003da   0x00000000   Code   RO          200    .text               c_w.l(indicate_semi.o)
+    0x000003c4   0x000003c4   0x00000008   Code   RO          123    .text               c_w.l(libspace.o)
+    0x000003cc   0x000003cc   0x0000000c   Code   RO          186    .text               c_w.l(sys_exit.o)
+    0x000003d8   0x000003d8   0x00000002   Code   RO          201    .text               c_w.l(use_no_semi.o)
+    0x000003da   0x000003da   0x00000000   Code   RO          203    .text               c_w.l(indicate_semi.o)
     0x000003da   0x000003da   0x00000002   PAD
-    0x000003dc   0x000003dc   0x00000066   Code   RO           21    .text.GPIOPortB_Handler  ultrasonic_sensor.o
+    0x000003dc   0x000003dc   0x00000066   Code   RO           19    .text.GPIOPortB_Handler  ultrasonic_sensor.o
     0x00000442   0x00000442   0x00000002   PAD
-    0x00000444   0x00000444   0x000000f8   Code   RO           19    .text.LEDToggler    ultrasonic_sensor.o
-    0x0000053c   0x0000053c   0x0000006a   Code   RO           35    .text.PLL_Init      pll.o
-    0x000005a6   0x000005a6   0x00000002   PAD
-    0x000005a8   0x000005a8   0x0000000c   Code   RO           61    .text.SysTick_Handler  systick.o
-    0x000005b4   0x000005b4   0x00000030   Code   RO           59    .text.SysTick_Init  systick.o
-    0x000005e4   0x000005e4   0x00000010   Code   RO           47    .text.Timer1A_Get_MC_Elapsed  timer1a.o
-    0x000005f4   0x000005f4   0x00000036   Code   RO           43    .text.Timer1A_Init  timer1a.o
-    0x0000062a   0x0000062a   0x00000002   PAD
-    0x0000062c   0x0000062c   0x0000000e   Code   RO           45    .text.Timer1A_Stop  timer1a.o
-    0x0000063a   0x0000063a   0x00000002   PAD
-    0x0000063c   0x0000063c   0x0000004e   Code   RO           49    .text.Timer1A_Wait1us  timer1a.o
-    0x0000068a   0x0000068a   0x00000002   PAD
-    0x0000068c   0x0000068c   0x0000016c   Code   RO           13    .text.main          ultrasonic_sensor.o
-    0x000007f8   0x000007f8   0x0000005a   Code   RO           77    x$fpl$dfixu         fz_ws.l(dfixu.o)
-    0x00000852   0x00000852   0x00000026   Code   RO           81    x$fpl$dfltu         fz_ws.l(dflt_clz.o)
-    0x00000878   0x00000878   0x00000154   Code   RO           87    x$fpl$dmul          fz_ws.l(dmul.o)
-    0x000009cc   0x000009cc   0x0000009c   Code   RO           90    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
-    0x00000a68   0x00000a68   0x0000000c   Code   RO           92    x$fpl$dretinf       fz_ws.l(dretinf.o)
-    0x00000a74   0x00000a74   0x00000000   Code   RO           94    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x00000a74   0x00000a74   0x00000010   Data   RO          256    Region$$Table       anon$$obj.o
+    0x00000444   0x00000444   0x0000006a   Code   RO           33    .text.PLL_Init      pll.o
+    0x000004ae   0x000004ae   0x00000002   PAD
+    0x000004b0   0x000004b0   0x0000001e   Code   RO           57    .text.SysTick_Start  systick.o
+    0x000004ce   0x000004ce   0x00000002   PAD
+    0x000004d0   0x000004d0   0x0000000e   Code   RO           59    .text.SysTick_Stop  systick.o
+    0x000004de   0x000004de   0x00000002   PAD
+    0x000004e0   0x000004e0   0x00000020   Code   RO           65    .text.SysTick_Wait  systick.o
+    0x00000500   0x00000500   0x0000002c   Code   RO           63    .text.SysTick_Wait1us  systick.o
+    0x0000052c   0x0000052c   0x00000010   Code   RO           45    .text.Timer1A_Get_MC_Elapsed  timer1a.o
+    0x0000053c   0x0000053c   0x00000036   Code   RO           41    .text.Timer1A_Init  timer1a.o
+    0x00000572   0x00000572   0x00000002   PAD
+    0x00000574   0x00000574   0x0000000e   Code   RO           43    .text.Timer1A_Stop  timer1a.o
+    0x00000582   0x00000582   0x00000002   PAD
+    0x00000584   0x00000584   0x00000234   Code   RO           13    .text.main          ultrasonic_sensor.o
+    0x000007b8   0x000007b8   0x0000005a   Code   RO           80    x$fpl$dfixu         fz_ws.l(dfixu.o)
+    0x00000812   0x00000812   0x00000026   Code   RO           84    x$fpl$dfltu         fz_ws.l(dflt_clz.o)
+    0x00000838   0x00000838   0x00000154   Code   RO           90    x$fpl$dmul          fz_ws.l(dmul.o)
+    0x0000098c   0x0000098c   0x0000009c   Code   RO           93    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
+    0x00000a28   0x00000a28   0x0000000c   Code   RO           95    x$fpl$dretinf       fz_ws.l(dretinf.o)
+    0x00000a34   0x00000a34   0x00000000   Code   RO           97    x$fpl$usenofp       fz_ws.l(usenofp.o)
+    0x00000a34   0x00000a34   0x00000010   Data   RO          259    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000a84, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000a44, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x00000a84, Size: 0x00000478, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x00000a44, Size: 0x00000470, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000        -       0x00000060   Zero   RW          121    .bss                c_w.l(libspace.o)
-    0x20000060        -       0x00000004   Zero   RW           63    .bss.SysTickTask    systick.o
-    0x20000064        -       0x00000004   Zero   RW           24    .bss.distance       ultrasonic_sensor.o
-    0x20000068        -       0x00000001   Zero   RW           23    .bss.done           ultrasonic_sensor.o
-    0x20000069   0x00000a84   0x00000003   PAD
-    0x2000006c        -       0x00000004   Zero   RW           25    .bss.duty_high      ultrasonic_sensor.o
-    0x20000070        -       0x00000004   Zero   RW           26    .bss.duty_low       ultrasonic_sensor.o
-    0x20000074   0x00000a84   0x00000004   PAD
-    0x20000078        -       0x00000000   Zero   RW            2    HEAP                startup.o
-    0x20000078        -       0x00000400   Zero   RW            1    STACK               startup.o
+    0x20000000        -       0x00000060   Zero   RW          124    .bss                c_w.l(libspace.o)
+    0x20000060        -       0x00000004   Zero   RW           22    .bss.distance       ultrasonic_sensor.o
+    0x20000064        -       0x00000001   Zero   RW           21    .bss.done           ultrasonic_sensor.o
+    0x20000065   0x00000a44   0x00000003   PAD
+    0x20000068        -       0x00000004   Zero   RW           23    .bss.duty_high      ultrasonic_sensor.o
+    0x2000006c        -       0x00000004   Zero   RW           24    .bss.duty_low       ultrasonic_sensor.o
+    0x20000070        -       0x00000000   Zero   RW            2    HEAP                startup.o
+    0x20000070        -       0x00000400   Zero   RW            1    STACK               startup.o
 
 
 ==============================================================================
@@ -720,16 +722,16 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       106          0          0          0          0        413   pll.o
-       692        632          0          0       1024        956   startup.o
-        60          0          0          0          4        761   systick.o
-       162          0          0          0          0       1000   timer1a.o
-       714          0          0          0         13       1638   ultrasonic_sensor.o
+       106          0          0          0          0        420   pll.o
+       692        632          0          0       1024        972   startup.o
+       120          0          0          0          0       1217   systick.o
+        84          0          0          0          0       1007   timer1a.o
+       666          0          0          0         13       1535   ultrasonic_sensor.o
 
     ----------------------------------------------------------------------
-      1744        632         16          0       1048       4768   Object Totals
+      1680        632         16          0       1040       5151   Object Totals
          0          0         16          0          0          0   (incl. Generated)
-        10          0          0          0          7          0   (incl. Padding)
+        12          0          0          0          3          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -782,15 +784,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2676        668         16          0       1144       5348   Grand Totals
-      2676        668         16          0       1144       5348   ELF Image Totals
-      2676        668         16          0          0          0   ROM Totals
+      2612        668         16          0       1136       5731   Grand Totals
+      2612        668         16          0       1136       5731   ELF Image Totals
+      2612        668         16          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2692 (   2.63kB)
-    Total RW  Size (RW Data + ZI Data)              1144 (   1.12kB)
-    Total ROM Size (Code + RO Data + RW Data)       2692 (   2.63kB)
+    Total RO  Size (Code + RO Data)                 2628 (   2.57kB)
+    Total RW  Size (RW Data + ZI Data)              1136 (   1.11kB)
+    Total ROM Size (Code + RO Data + RW Data)       2628 (   2.57kB)
 
 ==============================================================================
 

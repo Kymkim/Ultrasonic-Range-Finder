@@ -26,8 +26,8 @@
 
 
 
-// ***************** Timer0_Init ****************
-// Activate TIMER0 interrupts to run user task periodically
+// ***************** Timer1_Init ****************
+// Activate TIMER1 interrupts to run user task periodically
 // Inputs:  task is a pointer to a user function
 //          period in units (1/clockfreq)
 // Outputs: none
@@ -47,21 +47,6 @@ void Timer1A_Stop(void){
 
 uint32_t Timer1A_Get_MC_Elapsed(void){
 	return TIMER1_TAILR_R - TIMER1_TAR_R;
-}
-
-void Timer1A_Wait1us(int time){
-		int i;
-		SYSCTL_RCGCTIMER_R |= 0x01;		//Enable Timer1 function	
-		TIMER0_CTL_R = 0x00;						//Disable Timer1
-		TIMER0_CFG_R = 0x00;					//32 bit mode
-		TIMER0_TAMR_R = 0x02;					//Count down periodic
-		TIMER0_TAILR_R = 16 - 1;	//Number of counts to wait
-		TIMER0_ICR_R = 0x01;					//Clear interrupt flag
-		TIMER0_CTL_R = 0x01;					//Enable timer
-		for(i=0; i < time; i++){
-			while((TIMER0_RIS_R & 0x01) == 0);
-			TIMER0_ICR_R = 0x01;
-		}
 }
 
 

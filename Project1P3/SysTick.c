@@ -1,31 +1,47 @@
 // SysTick.c
 // Runs on TM4C123
-// Implements Systick timer for the Ultrasonic Sensor
-// February 15, 2024
-// Oliver Cabral
+// By Dr. Min He
+// December 10th, 2018
 
+#include <stdint.h>
+#include "SysTick.h"
 #include "tm4c123gh6pm.h"
 
+#define ONE_MICRO_SECOND          16     // number of machine cycles to generate 1us delay for 16MHz system clock
 
-void (*SysTickTask)(void);		//User defined function
-
-//Initialize the SysTick timer with the given task
-//
-//Input: *task = Function to be executed when the SysTick timer triggers.
-//Output: None
-void SysTick_Init(void(*task)(void), unsigned int reload){
-	SysTickTask = task;
-  NVIC_ST_CTRL_R 		= 0x00000000;                   
-  NVIC_ST_RELOAD_R 	= reload-1;  
-  NVIC_ST_CURRENT_R = 0x00000000;          
-  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x1FFFFFFF)|0x40000000;
-  NVIC_ST_CTRL_R = 0x07; 
+void SysTick_Start(void){
+  NVIC_ST_CTRL_R = 0;
+  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M; // number of counts to wait
+  NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears   
+	NVIC_ST_CTRL_R |= NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC; // enable SysTick with core clock
 }
 
-// When SysTick triggers, execute the input task
-//
-//Input: None
-//Output: None
-void SysTick_Handler(void){
-	(*SysTickTask)();
+// Disable Systick timer
+void SysTick_Stop(void){
+	NVIC_ST_CTRL_R = 0;
+}
+
+// Calculate number of machine cycles elapsed
+uint32_t SysTick_Get_MC_Elapsed(void){
+	return NVIC_ST_RELOAD_R-NVIC_ST_CURRENT_R;
+}
+
+// Time delay using busy wait.
+// This function assumes 16 MHz system clock.
+void SysTick_Wait1us(uint8_t delay){
+  NVIC_ST_CTRL_R = 0;
+  NVIC_ST_RELOAD_R = delay*ONE_MICRO_SECOND-1; // number of counts to wait
+  NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears
+	NVIC_ST_CTRL_R |= NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
+  while((NVIC_ST_CTRL_R&NVIC_ST_CTRL_COUNT)==0); // wait for count flag
+  NVIC_ST_CTRL_R = 0;
+}
+
+void SysTick_Wait(unsigned long delay){
+  volatile unsigned long elapsedTime;
+  unsigned long startTime = NVIC_ST_CURRENT_R;
+  do{
+    elapsedTime = (startTime-NVIC_ST_CURRENT_R)&0x00FFFFFF;
+  }
+  while(elapsedTime <= delay); 
 }

@@ -15,7 +15,7 @@ void (*SysTickTask)(void);		//User defined function
 void SysTick_Init(void(*task)(void)){
 	SysTickTask = task;
   NVIC_ST_CTRL_R 		= 0x00000000;                   
-  NVIC_ST_RELOAD_R 	= (NVIC_ST_RELOAD_M/2)-1;  
+  NVIC_ST_RELOAD_R 	= (NVIC_ST_RELOAD_M/4)-1;  
   NVIC_ST_CURRENT_R = 0x00000000;          
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x1FFFFFFF)|0x40000000;
   NVIC_ST_CTRL_R = 0x07; 

@@ -34,6 +34,6 @@
 void Timer1A_Init();
 void Timer1A_Stop(void);
 uint32_t Timer1A_Get_MC_Elapsed(void);
-void Timer1A_Wait1us(int time);
+void Timer1A_Wait1us(uint8_t time);
 
 #endif // __TIMER2INTS_H__
